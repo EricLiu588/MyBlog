@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	                    http://www.springframework.org/schema/aop
+	                    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	                    http://www.springframework.org/schema/tx
+	                    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	                    
+    	<!-- 创建一个Bean对象id为sessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 将Hibernate核心配置文件hibernate.cfg.xml 引用给Spring的LocalSessionFactoryBean-->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+	</bean>	
+	<!-- 注册一个po实体类Diary -->
+	<bean id="diary" class="com.heroliu.pojo.Diary"/>
+	
+	<!-- 注册一个dao操作类 -->
+	<bean id="diaryDao" class="com.heroliu.dao.Impl.DiaryDao"/>
+	
+		<!-- 注册一个biz业务逻辑类 -->
+	<bean id="diaryBiz" class="com.heroliu.biz.Impl.DiaryBiz">
+		<!-- 将数据库连接SessionFactory注入到Dao中 -->
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+		<!-- 将Dao操作类注入到Biz业务逻辑层 -->
+		<property name="diaryDao">
+			<ref bean="diaryDao"/>
+		</property>
+	</bean>
+		<!-- 注册一个Action类 -->
+	<bean id="DiaryAction" class="com.heroliu.action.DiaryAction" scope="prototype">
+		<!-- 将Dept实体类注入 -->
+		<property name="diary">
+			<ref bean="diary"/>
+		</property>
+		<!-- 将deptBiz注入 -->
+		<property name="diaryBiz">
+			<ref bean="diaryBiz"/>
+		</property>
+	</bean>
+	
+</beans>	                    

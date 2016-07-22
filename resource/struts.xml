@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.encoding.i18n" value="UTF-8" />
+	<constant name="struts.DynamicMethodInvocation" value="false" />
+	<!-- 将Struts2框架中的所有Action动作类由Spring框架进行托管 -->
+	<constant name="objectFactory" value="spring" />
+	
+	<package name="default" extends="struts-default" namespace="/">
+	    <action name="findAll*" class="{1}Action" method="findAll{1}">
+			<result name="success" type="dispatcher">
+				<param name="location">jsp/index.jsp</param>
+			</result>
+		</action>
+	</package>
+	
+</struts>

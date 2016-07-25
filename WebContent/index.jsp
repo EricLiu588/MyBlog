@@ -15,11 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<link href="<%=basePath %>css/carousel.css" rel="stylesheet">
-<link href="<%=basePath %>css/blog.css" rel="stylesheet">
-<style type="text/css">
-</style>
+    <link href="//cdn.bootcss.com/fullPage.js/2.8.2/jquery.fullPage.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%=basePath %>css/carousel.css" rel="stylesheet">
+	<link href="<%=basePath %>css/blog.css" rel="stylesheet">
 <title>EricLiu - 刘英杰</title>
 </head>
 <body>
@@ -68,73 +67,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <!-- Carousel
     ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-       -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide" src="<%=basePath %>pic/background2.jpg" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>你好啊 第<%=++i %>位访客</h1><br>
-              <p><code>System.out.println("你好啊");</code></p>
-              <p><code>cout&lt;&lt;"你好啊"&lt;&lt;endl;</code></p>
-              <p><code>fmt.Println("你好啊");</code></p>
-            </div>
-          </div>
+    <div id="scrollPage">
+    	<div class="section" data-anchor="page1" style="background-image: url('pic/background2.jpg');">
+    		<div class="container-fluid">
+           		<div align="center">
+           			<h1 style="color:#FFF;"><strong>一辈子只满足于吃回锅肉的话，你让锅包肉怎么办</strong></h1><br>
+           			<p><h3><code>System.out.println("你好啊");</code></h3></p>
+           			<p><h3><code>cout&lt;&lt;"你好啊"&lt;&lt;endl;</code></h3></p>
+           			<p><h3><code>fmt.Println("你好啊");</code></h3></p>
+           		</div>
+    		</div>
         </div>
-        <!-- 
-        <div class="item">
-          <img class="second-slide" src="<%=basePath %>pic/slide-02.jpg" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="<%=basePath %>pic/slide-03.jpg" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-       -->
-       <!-- 
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-       -->
-    </div><!-- /.carousel -->
+    	<div class="section" style="background-color: #EEE;">
+    		<c:forEach items="${requestScope.listsDiary }" var="diary">
+    			<div class="slide">
+    				<div class="container-fluid">
+    					<div class="jumbotron">
+    						<h1>${diary.title }</h1>
+    						<p>${diary.article }</p>
+    					</div>
+    				</div>	
+    			</div>
+    		</c:forEach>
+    	</div>
+    	<footer class="blog-footer">
+   			<p>访问量：<%=++i %>>&nbsp;位</p>
+   			<p>晋ICP备15009514号-1</p>
+   			<p><a href="#">返回顶部</a></p>
+    	</footer>
     </div>
-    <c:forEach items="${requestScope.listsDiary }" var="diary">
-    	<div class="jumbotron">
-    	<h1>${diary.title }</h1>
-    	<p>${diary.article }</p>
-    </div>
-    </c:forEach>
-    <footer class="blog-footer">
-    	<p>Blog powered by bootstrap</p>
-    	<p>晋ICP备15009514号-1</p>
-    	<p><a href="#">返回顶部</a></p>
-    </footer>
+	
+
   <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/fullPage.js/2.8.2/jquery.fullPage.js"></script>
+  <script src="//cdn.bootcss.com/fullPage.js/2.8.2/vendors/jquery.easings.min.js"></script>
+  <script src="//cdn.bootcss.com/fullPage.js/2.8.2/vendors/scrolloverflow.min.js"></script>
   <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#scrollPage").fullpage({
+        	'navigation': true,
+        });
+    });
+  </script>  
 </body>
 </html>

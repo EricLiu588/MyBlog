@@ -122,6 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </a>
        -->
     </div><!-- /.carousel -->
+    </div>
     <c:forEach items="${requestScope.listsDiary }" var="diary">
     	<div class="jumbotron">
     	<h1>${diary.title }</h1>
